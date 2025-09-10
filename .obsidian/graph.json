@@ -1,7 +1,7 @@
 {
   "collapse-filter": true,
   "search": "",
-  "showTags": true,
+  "showTags": false,
   "showAttachments": false,
   "hideUnresolved": false,
   "showOrphans": true,
@@ -25,27 +25,27 @@
       "query": "path:\"4.Архитектура аппаратных средств\"  ",
       "color": {
         "a": 1,
-        "rgb": 5412832
+        "rgb": 11657298
       }
     },
     {
       "query": "path:\"5.Основы проектирования баз данных\"  ",
       "color": {
         "a": 1,
-        "rgb": 5526240
+        "rgb": 5431378
       }
     }
   ],
   "collapse-display": false,
   "showArrow": false,
   "textFadeMultiplier": 0,
-  "nodeSizeMultiplier": 0.840104166666667,
-  "lineSizeMultiplier": 0.993229166666667,
+  "nodeSizeMultiplier": 1,
+  "lineSizeMultiplier": 1,
   "collapse-forces": false,
-  "centerStrength": 0.0885416666666667,
-  "repelStrength": 16.5625,
+  "centerStrength": 0.518713248970312,
+  "repelStrength": 10,
   "linkStrength": 1,
-  "linkDistance": 165,
-  "scale": 0.11660891579457502,
-  "close": true
+  "linkDistance": 250,
+  "scale": 1.2414543899483146,
+  "close": false
 }
