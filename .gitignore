@@ -1,0 +1,58 @@
+# Скомпилированные файлы
+*.o
+*.obj
+*.so
+*.dylib
+*.dll
+*.out
+*.app
+
+# Объектные файлы и библиотеки
+*.a
+*.lib
+*.lai
+*.la
+
+# Временные файлы компиляции
+*.gch
+*.pch
+*.dwo
+
+# CMake
+build/
+Build/
+build-*/
+CMakeFiles/
+CMakeCache.txt
+cmake_install.cmake
+Makefile
+install_manifest.txt
+compile_commands.json
+
+# Отладка
+*.pdb
+*.ilk
+*.idb
+
+# Файлы IDE (Visual Studio, CLion, QtCreator)
+.vs/
+.idea/
+*.suo
+*.user
+*.sdf
+*.opensdf
+*.sln
+*.vcxproj
+*.filters
+*.user
+*.kdev4
+
+# Файлы операционной системы
+.DS_Store
+Thumbs.db
+
+# Прочее
+*.log
+*.tmp
+*.bak
+*.swp
