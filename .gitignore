@@ -35,7 +35,7 @@ compile_commands.json
 *.idb
 
 # Файлы IDE (Visual Studio, CLion, QtCreator)
-.vs/
+.vscode/
 .idea/
 *.suo
 *.user
