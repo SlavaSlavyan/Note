@@ -31,3 +31,7 @@
 
 5. В **main()** проверьте все методы, включая попытку снять больше, чем есть 
 на счету.
+
+---
+
+Точка входа [**start.cpp**](./start.cpp), включает в себя класс [**BankAccount.cpp**](./src/BankAccount.cpp) с заголовком [**BankAccount.hpp**](./include/BankAccount.hpp).
