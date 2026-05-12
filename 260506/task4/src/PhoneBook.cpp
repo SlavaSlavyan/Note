@@ -41,7 +41,7 @@ void PhoneBook::add(const char* n, const char* hp, const char* wp, const char* i
     length++;
 }
 
-void PhoneBook::remove(int id) 
+bool PhoneBook::remove(int id) 
 {
     if (id > -1 && id < length) 
     {
@@ -67,11 +67,17 @@ void PhoneBook::remove(int id)
         delete[] oldData;
 
         length--;
+
+        return true;
     }
+
+    return false;
 }
 
 void PhoneBook::find(const char* request)
 {
+    int count = 0;
+
     for (int i = 0; i < length; i++) {
 
         bool found = false;
@@ -87,14 +93,25 @@ void PhoneBook::find(const char* request)
         }
 
         if (found) {
-            std::cout << i << '.' << contacts[i]->getName() << std::endl;
+            std::cout << i + 1 << '.' << contacts[i]->getName() << " - [" << contacts[i]->getWorkPhone() << ']' << std::endl;
+            count++;
         }
+    }
+
+    if (!count) {
+        std::cout << "No results.\n";
     }
 };
 
 void PhoneBook::printAll() 
 {
-    for (int i = 0; i < length; i++) {
-        std::cout << i << '.' << contacts[i]->getName() << std::endl;
+    if (length) {
+        for (int i = 0; i < length; i++) {
+            std::cout << i + 1 << '.' << contacts[i]->getName() << " - [" << contacts[i]->getWorkPhone() << ']' << std::endl;
+        }
+
+        return;
     }
+    
+    std::cout << "Zero contacts.\n";
 }

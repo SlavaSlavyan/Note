@@ -14,7 +14,7 @@ public:
 
     void add(const char* n, const char* hp, const char* wp, const char* i);
 
-    void remove(int id);
+    bool remove(int id);
 
     void find(const char* request);
 
