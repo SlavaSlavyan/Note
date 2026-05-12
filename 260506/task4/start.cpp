@@ -2,60 +2,93 @@
 #include <conio.h>
 #include "include/PhoneBook.hpp"
 
-void mainMenu(int* status);
-void allContacts(int* status, PhoneBook* contacts);
+int menu();
 
-int main()
+int main() 
 {
     PhoneBook* contacts = new PhoneBook();
 
-    int status = 0;
-
-    while (true) 
+    while (true)
     {
-        switch (status)
+        switch (menu())
         {
         case 0:
-            mainMenu(&status);
+            system("cls");
+            std::cout << "INVALID INPUT\n";
+            _getch();
             break;
+
         case 1:
-            allContacts(&status, contacts);
+            system("cls");
+            std::cout << "ALL CONTACTS:\n\n";
+            contacts->printAll();
+            _getch();
+            break;
+
+        case 2: {
+            char* name = new char[0];
+            system("cls");
+            std::cout << "REQUEST << ";
+            std::cin >> name;
+            contacts->find(name);
+            delete[] name;
+            _getch();
             break;
         }
+        case 4: {
+            char *  n = new char[0],
+                 * hp = new char[0],
+                 * wp = new char[0],
+                 *  i = new char[0];
 
-        if (status == 5) {
+            system("cls");
+            std::cout << "NAME << ";
+            std::cin >> n;
+            std::cout << "HOME PHONE << ";
+            std::cin >> hp;
+            std::cout << "WORK PHONE << ";
+            std::cin >> wp;
+            std::cout << "INFO << ";
+            std::cin >> i;
+            contacts->add(n,hp,wp,i);
+            delete[] n;
+            delete[] hp;
+            delete[] wp;
+            delete[] i;
+            system("cls");
+            std::cout << "New contact was added.\n";
+            _getch();
             break;
+        }   
+        case 5: {
+            int id;
+            system("cls");
+            std::cout << "ID << ";
+            std::cin >> id;
+            contacts->remove(id);
+            system("cls");
+            std::cout << "Contact was deleted.\n";
+            _getch();
+            break;
+        }    
+        case 6:
+            return 0;
         }
     }
-
-    delete contacts;
-
-    return 0;
 }
 
-void mainMenu(int* status) 
+int menu()
 {
-    std::cout << "\033[2J\033[1;1H";
-    std::cout << "MAIN MENU:\n\n1.Show all contacts\n" <<
-    "2.Find contact\n3.Add contact\n4.Delete Contact\n5.Exit\n\n>> ";
+    system("cls");
 
-    std::cin >> *status;
+    int enter;
 
-    if (*status < 0 || *status > 5) {
-        *status = 0;
-        std::cout << "\033[2J\033[1;1H" << "INVALID INPUT\n";
-        _getch();
+    std::cout << "MAIN MENU:\n\n1.Show all contacts\n2.Find contact\n3.Show contact info\n4.Add contact\n5.Remove contact\n6.Exit\n\n>> ";
+    std::cin >> enter;
+
+    if (enter < 1 || enter > 6) {
+        return 0;
     }
-}
 
-void allContacts(int* status, PhoneBook* contacts)
-{
-    contacts->printAll();
-    _getch();
-    *status = 0;
-}
-
-void findContact(int* status, PhoneBook* contacts)
-{
-    
+    return enter;
 }

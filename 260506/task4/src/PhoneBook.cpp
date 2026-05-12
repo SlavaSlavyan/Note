@@ -72,10 +72,6 @@ void PhoneBook::remove(int id)
 
 void PhoneBook::find(const char* request)
 {
-    std::cout << "\033[2J\033[1;1H";
-
-    std::cout << "FOUND BY REQUEST [" << request << "]:\n\n";
-
     for (int i = 0; i < length; i++) {
 
         bool found = false;
@@ -98,10 +94,6 @@ void PhoneBook::find(const char* request)
 
 void PhoneBook::printAll() 
 {
-    std::cout << "\033[2J\033[1;1H";
-
-    std::cout << "ALL CONTACTS:\n\n";
-    
     for (int i = 0; i < length; i++) {
         std::cout << i << '.' << contacts[i]->getName() << std::endl;
     }
