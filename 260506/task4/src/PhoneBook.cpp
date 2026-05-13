@@ -83,7 +83,7 @@ void PhoneBook::find(const char* request)
         bool found = false;
 
         for (int j = 0; j < strlen(request); j++) {
-            if (contacts[i]->getName()[i] == request[i]) {
+            if (contacts[i]->getName()[j] == request[j]) {
                 found = true;
             }
             else {

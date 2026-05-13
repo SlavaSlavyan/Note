@@ -1,6 +1,7 @@
 #include "../include/Contact.hpp"
 #include <cstring>
 
+// реализация конструктора (в списке инициализации выделяется память под каждую строку)
 Contact::Contact(const char* n, const char* hp, const char* wp, const char* i):
 name(n ? new char[strlen(n) + 1] : nullptr),
 homePhone(hp ? new char[strlen(hp) + 1] : nullptr),
@@ -10,12 +11,15 @@ info(i ? new char[strlen(i) + 1] : nullptr)
     const char* init_vars[] = {n, hp, wp, i};
     char* vars[] = {name, homePhone, workPhone, info};
 
+    // копируем информацию
     for (int i = 0; i < 4; i++) {
         if (vars[i]) {
             strcpy_s(vars[i], strlen(init_vars[i]) + 1, init_vars[i]);
         }
     }
 }
+
+// реализация всех свойств
 
 char* Contact::getName() const {
     if (name) {
