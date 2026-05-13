@@ -16,14 +16,19 @@ void Fraction::Reduction()
     denominator /= a;
 }
 
+// основной конструктор
 Fraction::Fraction(int n, int d) : numerator(n), denominator(d)
 {
+    // исключаем ноль
     if (!denominator) {
         denominator = 1;
     }
 
+    // сокращаем дробь
     this->Reduction();
 }
+
+// ну а дальше мне лень расписывать всё и так понятно что это всё реализации
 
 Fraction Fraction::operator + (const Fraction& other)
 {
