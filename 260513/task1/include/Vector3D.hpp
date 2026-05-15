@@ -7,7 +7,7 @@ class Vector3D {
     float data[3];
 
     // счётчик
-    static int count;
+    static inline int count = 0;
 
 public:
 
@@ -23,7 +23,7 @@ public:
     }
 
     // метод для получения счётчика
-    int Count() { return count; }
+    static int Count() { return count; }
 
     // математические операторы
 

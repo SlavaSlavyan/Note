@@ -91,14 +91,22 @@ bool Fraction::operator != (const Fraction& other) const
 
 bool Fraction::operator > (const Fraction& other) const 
 {
-    return double(numerator/denominator) > 
-           double(other.numerator/other.denominator);
+    double a, b;
+
+    a = numerator/(float)denominator;
+    b = other.numerator/(float)other.denominator;
+
+    return (a > b);
 }
 
 bool Fraction::operator < (const Fraction& other) const
 {
-    return double(numerator/denominator) <
-           double(other.numerator/other.denominator);
+    double a, b;
+
+    a = numerator/(float)denominator;
+    b = other.numerator/(float)other.denominator;
+
+    return (a < b);
 }
 
 bool Fraction::operator >= (const Fraction& other) const
@@ -120,6 +128,6 @@ std::ostream& operator << (std::ostream& os, const Fraction& f)
 std::istream& operator >> (std::istream& in, Fraction& f) 
 {
     in >> f.numerator >> f.denominator;
-    
+    f.Reduction();
     return in;
 }

@@ -2,9 +2,6 @@
 #include <stdexcept>
 #include <iostream>
 
-// начальное значение счётчика
-int Vector3D::count = 0;
-
 // основной конструктор который записывает данные
 Vector3D::Vector3D(float x, float y, float z)
 {
