@@ -17,6 +17,9 @@ public:
     // базовый конструктор
     Vector3D() : Vector3D(0, 0, 0) {}
 
+    // конструктор копирования
+    Vector3D(const Vector3D& other) : Vector3D(other.data[0],other.data[1],other.data[2]) {}
+
     // деструктор который уменьшает счётчик
     ~Vector3D() {
         count--;

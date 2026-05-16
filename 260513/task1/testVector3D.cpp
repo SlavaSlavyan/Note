@@ -31,15 +31,17 @@ int main()
     std::cout << "\nAccess to coordinates by index:\n";
     for (int i = 0; i < 3; i++) {
         std::cout << "a[" << i << "] >> " << (*a)[i] << '\n';
-    }
-
-    int test = Vector3D::Count();
+    }    
 
     // проверка счётчика
     std::cout << "\nCount of vectors:\n"
-        << "Vector3D::Count() >> " << test << '\n';
+        << "Vector3D::Count() >> " << Vector3D::Count() << '\n';
     delete a;
+    std::cout << "delete a;\n"
+        << "Vector3D::Count() >> " << Vector3D::Count() << '\n';
     delete b;
+    std::cout << "delete b;\n"
+        << "Vector3D::Count() >> " << Vector3D::Count() << "\n\nEND\n";
 
     _getch();
 

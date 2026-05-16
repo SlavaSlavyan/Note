@@ -53,3 +53,34 @@ cout << c; // Вывод: 5/4
 
 ---
 
+Задание получилось очень обьёмным, так что вот вам ещё небольшой гайд где что лежит.
+
+```plain
+task1/
+├── builds/                 # Скомпилированные задания
+│   ├── Fraction.exe       
+│   ├── Matrix.exe         
+│   └── Vector3D.exe       
+├── include/                # Интерфейсы классов
+│   ├── Fraction.hpp       
+│   ├── Matrix.hpp         
+│   └── Vector3D.hpp       
+├── src/                    # Реализации классов
+│   ├── Fraction.cpp        
+│   ├── Matrix.cpp          
+│   └── Vector3D.cpp        
+├── readme.md               
+├── testFraction.cpp        # Задание 1.1 (Дроби)
+├── testMatrix.cpp          # Задание 1.3 (Матрицы)
+└── testVector3D.cpp        # Задание 1.2 (Векторы)
+```
+
+**ЛИЧНАЯ ПРОСЬБА!!!** Если будет время, проверьте задания на утечки памяти, я не уверен в том что всё сделал абсолютно верно.
+
+Каждое из под-заданий имеет отдельную точку входа, интерфейс, реализацию и тест. Вот вам ссылки чтобы проверять было чуть удобнее.
+
+**1.1 FRACTION** [ [вход](./testFraction.cpp) | [интерфейс](./include/Fraction.hpp) | [реализация](./src/Fraction.cpp) | [тест](./builds/Fraction.exe) ]
+
+**1.2 VECTOR3D** [ [вход](./testVector3D.cpp) | [интерфейс](./include/Vector3D.hpp) | [реализация](./src/Vector3D.cpp) | [тест](./builds/Vector3D.exe) ]
+
+**1.3 MATRIX** [ [вход](./testMatrix.cpp) | [интерфейс](./include/Matrix.hpp) | [реализация](./src/Matrix.cpp) | [тест](./builds/Matrix.exe) ]
