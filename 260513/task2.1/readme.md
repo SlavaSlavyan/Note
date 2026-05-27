@@ -25,3 +25,15 @@
 Shape* shapes[] = {new Circle(5), new Rectangle(3,4)};
 cout << shapes[0]->area(); // π*25
 ```
+
+---
+
+Решение задания состоит из **4 классов**. Класс [**Shape**](./include/Shape.hpp) считается абстрактным и не имеет реализации, так что состоит из одного заголовочного файла. Все остальные фигуры состоят аз двух файлов.
+
+**CIRCLE** [ [интерфейс](./include/Circle.hpp) | [реализация](./src/Circle.cpp) ]
+
+**RECTANGLE** [ [интерфейс](./include/Rectangle.hpp) | [реализация](./src/Rectangle.cpp) ]
+
+**TRIANGLE** [ [интерфейс](./include/Triangle.hpp) | [реализация](./src/Triangle.cpp) ]
+
+Ну и конечно же [вход](./start.cpp).

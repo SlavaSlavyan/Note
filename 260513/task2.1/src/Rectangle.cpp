@@ -1,8 +1,11 @@
 #include "../include/Rectangle.hpp"
 #include <iostream>
 
+// конструктор так же выполняет действия из конструктора Shape
 Rectangle::Rectangle(double w, double h) : Shape(), width(w), heigth(h) 
 {
+    // проверка отрицательных аргументов
+
     if (width <= 0) {
         width = 1;
     }
@@ -11,12 +14,14 @@ Rectangle::Rectangle(double w, double h) : Shape(), width(w), heigth(h)
     }
 }
 
+// реализация методов
+
 double Rectangle::area() const {
-    return width * heigth;
+    return width * heigth; // ab
 }
 
 double Rectangle::perimeter() const {
-    return (width + heigth) * 2;
+    return (width + heigth) * 2; // 2(a+b)
 }
 
 void Rectangle::print() const {

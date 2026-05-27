@@ -7,15 +7,19 @@
 
 int main()
 {
+    // создаём все фигуры
     Shape* shapes[] = {new Circle(1.5),
                        new Rectangle(3,5),
                        new Triangle(3,4,5)};
 
-    for (int i = 0; i < 3; i++) {
+    // вызываем функции print для каждой фигуры
+    for (int i = 0; i < 3; i++) 
+    {
         shapes[i]->print();
         std::cout << '\n';
     }
 
+    // очищение памяти и и показ счётчика
     for (int i = 0; i < 3; i++) 
     {
         std::cout << "delete shapes [" << i << "]\n";

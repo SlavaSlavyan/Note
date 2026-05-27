@@ -2,14 +2,18 @@
 #include <iostream>
 #include <cmath>
 
-Triangle::Triangle(double e1, double e2, double e3) : edges{e1,e2,e3}
+// конструктор так же выполняет действия из конструктора Shape
+Triangle::Triangle(double e1, double e2, double e3) : Shape(), edges{e1,e2,e3}
 {
+    // проверяем возможно ли существование треугольника
     if (e1 + e2 <= e3 || e2 + e3 <= e1 || e1 + e3 <= e2) {
         edges[0] = 1;
         edges[1] = 1;
         edges[2] = 1;
     }
 }
+
+// реализация методов
 
 double Triangle::area() const 
 {
