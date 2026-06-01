@@ -2,8 +2,10 @@
 #include "Employee.hpp"
 #include <iostream>
 
+// класс менеджера
 class Manager : public Employee {
 
+    // количество подчинённых
     unsigned int subordinatesCount;
 
 public:
@@ -14,6 +16,7 @@ public:
 
     Manager(const Manager& other) : Manager(other.name, other.id, other.salary, other.subordinatesCount) {}
 
+    // +100 за каждого подчинённого
     unsigned int calculateSalary() const override {
         return salary + subordinatesCount * 100;
     }

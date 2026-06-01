@@ -3,8 +3,10 @@
 #include <iostream>
 #include <cstring>
 
+// класс разработчика
 class Developer : public Employee {
 
+    // добавились поля строчка об использованном языке программирования и годах опыта
     char* programmingLanguage;
     unsigned int experience;
 
@@ -20,11 +22,16 @@ public:
 
     Developer(const Developer& other) : Developer(other.name, other.id, other.salary, other.experience, other.programmingLanguage) {}
 
+    // переопределяем деструктор
     ~Developer() {
         Employee::~Employee();
-        delete[] programmingLanguage;
+        if (programmingLanguage) {
+            delete[] programmingLanguage;
+            programmingLanguage = nullptr;
+        }
     }
 
+    // бонус +5000 за каждый год опыта
     unsigned int calculateSalary() const override {
         return salary + experience * 5000;
     }

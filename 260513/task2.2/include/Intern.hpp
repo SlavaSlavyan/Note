@@ -2,8 +2,10 @@
 #include "Employee.hpp"
 #include <iostream>
 
+// класс интерна
 class Intern : public Employee {
-
+    
+    // поле наличия наставника
     bool haveMentor;
 
 public:
@@ -14,6 +16,7 @@ public:
 
     Intern(const Intern& other) : Intern(other.name, other.id, other.salary, other.haveMentor) {}
 
+    // от общей зарплаты интерн получает 70%
     unsigned int calculateSalary() const override {
         return salary * 0.7f;
     }
