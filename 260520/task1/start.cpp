@@ -1,4 +1,5 @@
 #include <iostream>
+#include <conio.h>
 #include "include/SmartArray.hpp"
 
 int main() {
@@ -22,6 +23,10 @@ int main() {
     strArray.push_back("Hello");
     strArray.push_back("World");
     strArray.push_back("C++");
+
+    std::cout << "\nEND\n";
+
+    _getch();
 
     return 0;
 }
