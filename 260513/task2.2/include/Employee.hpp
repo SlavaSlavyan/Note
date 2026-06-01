@@ -24,4 +24,8 @@ public:
     }
 
     virtual void getInfo(bool customSalary = false) const;
+
+    void setID(unsigned int newID) {
+        id = newID;
+    }
 };

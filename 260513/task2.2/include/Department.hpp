@@ -1,22 +1,16 @@
 #pragma once
 #include "Employee.hpp"
+#include "Manager.hpp"
+#include "Developer.hpp"
+#include "Intern.hpp"
 
 class Department {
 
-    Employee* employees = new Employee[0];
-    unsigned int newID = 0, employeesCount = 0;
+    Employee** employees = new Employee*[0];
+    unsigned int count = 0, newID = 0;
 
 public:
 
-    ~Department();
+    void add(const Employee* newEmployee);
 
-    bool add(const Employee*);
-
-    bool remove(const Employee*);
-
-    unsigned int total_salary() const;
-
-    unsigned int max_salary() const;
-
-    void print() const;
 };
