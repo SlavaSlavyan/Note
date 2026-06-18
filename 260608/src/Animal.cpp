@@ -1,109 +1,119 @@
 #include "../include/Animal.hpp"
 #include <cstring>
+#include <iostream>
 
-Animal::Animal() : id(0), reportsCount(0), reports(nullptr), name(nullptr), years(0) {}
 
-Animal::Animal(unsigned int i, char* n, unsigned int y, unsigned int o) : Animal()
+Animal::Animal() : id(0), years(0), owner(0), reports(nullptr), reportsCount(0) {}
+
+void Animal::SetName(const char* newName) 
 {
-    id = i;
-    years = y;
-    owner = o;
-
-    if (n) {
-        name = new char[strlen(n + 1)];
-        strcpy_s(name, strlen(n + 1), n);
+    if (newName) {
+        name = new char[strlen(newName) + 1];
+        strcpy_s(name, strlen(newName) + 1, newName);
     }
+    
+    else name = nullptr;
 }
 
-Animal::Animal(const Animal& other) : Animal(other.id, other.name, other.years, other.owner)
+Animal::Animal(const Animal& other) : Animal()
 {
+    id = other.id;
+    years = other.years;
+    owner = other.owner;
     reportsCount = other.reportsCount;
-
-    if (reportsCount) 
+    
+    if (!reportsCount) 
     {
         reports = new unsigned int[reportsCount];
-    
+
         for (unsigned int i = 0; i < reportsCount; i++) {
             reports[i] = other.reports[i];
         }
     }
+
+    SetName(other.name);
 }
 
-Animal::~Animal() 
+Animal::~Animal()
 {
     if (name) delete[] name;
     if (reports) delete[] reports;
-    
-    name = nullptr;
-    reports = nullptr;
 }
 
-void Animal::AddReport(unsigned int newId)
+unsigned int Animal::GetReport(unsigned int listId) const
 {
-    unsigned int* oldData = nullptr;
+    if (listId >= reportsCount) return 0;
 
-    if (reportsCount) 
-    {
-        oldData = new unsigned int[reportsCount];
-        
-        for (unsigned int i = 0; i < reportsCount; i++) {
-            oldData[i] = reports[i];
-        }
-
-        delete[] reports;
-        reports = nullptr;
-    }
-
-    reports = new unsigned int[reportsCount + 1];
-
-    if (oldData) 
-    {
-        for (unsigned int i = 0; i < reportsCount; i++) {
-            reports[i] = oldData[i];
-        }
-
-        delete[] oldData;
-        oldData = nullptr;
-    }
-
-    reports[reportsCount] = newId;
-    reportsCount++;
+    return reports[listId];
 }
 
-unsigned int Animal::FindReport(unsigned int findId)
+unsigned int Animal::FindReport(unsigned int reportId)
 {
     for (unsigned int i = 0; i < reportsCount; i++) {
-        if (reports[i] == findId) return i + 1;
+        if (reportId == reports[i]) return i + 1;
     }
 
     return 0;
 }
 
-bool Animal::RemoveReport(unsigned int delId)
+bool Animal::AddReport(unsigned int reportId)
 {
-    delId = FindReport(delId) - 1;
+    if (FindReport(reportId)) return false;
 
-    if (delId == -1) return false;
+    unsigned int* newData = new unsigned int[reportsCount + 1];
 
-    unsigned int* newData = nullptr;
-
-    if (reportsCount - 1) 
-    {
-        newData = new unsigned int[reportsCount - 1];
-        
-        for (unsigned int i = 0; i < delId; i++) {
+    if (reports) {
+        for (unsigned int i = 0; i < reportsCount; i++) {
             newData[i] = reports[i];
         }
 
-        for (unsigned int i = delId + 1; i < reportsCount; i++) {
-            newData[i - 1] = reports[i];
-        }
+        delete[] reports;
+    }
+
+    newData[reportsCount] = reportId;
+    reports = newData;
+
+    reportsCount++;
+
+    return true;
+}
+
+bool Animal::RemoveReport(unsigned int listId)
+{
+    if (listId >= reportsCount) return false;
+
+    if (reportsCount == 1) 
+    {
+        delete[] reports;
+        reports = nullptr;
+
+        reportsCount = 0;
+
+        return true;
+    }
+
+    unsigned int* newData = new unsigned int[reportsCount - 1];
+
+    for (unsigned int i = 0; i < listId; i++) {
+        newData[i] = reports[i];
+    }
+
+    for (unsigned int i = listId + 1; i < reportsCount; i++) {
+        newData[i - 1] = reports[i];
     }
 
     delete[] reports;
     reports = newData;
 
     reportsCount--;
-    
+
     return true;
+}
+
+void Animal::Print()
+{
+    std::cout << "==============================\n  ID: " << id << "\n  Name: ";
+    if (name) std::cout << name;
+    else std::cout << "NULL";
+    std::cout << "\n  Years: " << years << "\n  Count of reports: " << reportsCount << '\n';
 }

@@ -1,101 +1,102 @@
 #include "../include/Client.hpp"
 #include <cstring>
+#include <iostream>
 
-Client::Client() : id(0), animalsCount(0), animals(nullptr), name(nullptr) {}
+Client::Client() : id(0), animals(nullptr), animalsCount(0), name(nullptr) {}
 
-Client::Client(unsigned int i, char* n) : Client()
+void Client::SetName(const char* newName) 
 {
-    id = i;
-
-    if (n) {
-        name = new char[strlen(n + 1)];
-        strcpy_s(name, strlen(n + 1), n);
+    if (newName) {
+        name = new char[strlen(newName) + 1];
+        strcpy_s(name, strlen(newName) + 1, newName);
     }
+    
+    else name = nullptr;
 }
 
-Client::Client(const Client& other) : Client(other.id, other.name)
+Client::Client(const Client& other) : Client()
 {
+    id = other.id;
     animalsCount = other.animalsCount;
-
-    if (animalsCount) 
+    
+    if (!animalsCount) 
     {
         animals = new unsigned int[animalsCount];
-    
+
         for (unsigned int i = 0; i < animalsCount; i++) {
             animals[i] = other.animals[i];
         }
     }
+
+    SetName(other.name);
 }
 
-Client::~Client() 
+Client::~Client()
 {
-    if (name) delete[] name;
     if (animals) delete[] animals;
-
-    name = nullptr;
-    animals = nullptr;
+    if (name) delete[] name;
 }
 
-void Client::AddAnimal(unsigned int newId)
+unsigned int Client::GetAnimal(unsigned int animalId) const
 {
-    unsigned int* oldData = nullptr;
+    if (animalId >= animalsCount) return 0;
 
-    if (animalsCount) 
-    {
-        oldData = new unsigned int[animalsCount];
-        
-        for (unsigned int i = 0; i < animalsCount; i++) {
-            oldData[i] = animals[i];
-        }
-
-        delete[] animals;
-        animals = nullptr;
-    }
-
-    animals = new unsigned int[animalsCount + 1];
-
-    if (oldData) 
-    {
-        for (unsigned int i = 0; i < animalsCount; i++) {
-            animals[i] = oldData[i];
-        }
-
-        delete[] oldData;
-        oldData = nullptr;
-    }
-
-    animals[animalsCount] = newId;
-    animalsCount++;
+    return animals[animalId];
 }
 
-unsigned int Client::FindAnimal(unsigned int findId)
+unsigned int Client::FindAnimal(unsigned animalId) const
 {
     for (unsigned int i = 0; i < animalsCount; i++) {
-        if (animals[i] == findId) return i + 1;
+        if (animalId == animals[i]) return i + 1;
     }
 
     return 0;
 }
 
-bool Client::RemoveAnimal(unsigned int delId)
+bool Client::AddAnimal(unsigned int animalId)
 {
-    delId = FindAnimal(delId) - 1;
+    if (FindAnimal(animalId)) return false;
 
-    if (delId == -1) return false;
+    unsigned int* newData = new unsigned int[animalsCount + 1];
 
-    unsigned int* newData = nullptr;
-
-    if (animalsCount - 1) 
-    {
-        newData = new unsigned int[animalsCount - 1];
-        
-        for (unsigned int i = 0; i < delId; i++) {
+    if (animals) {
+        for (unsigned int i = 0; i < animalsCount; i++) {
             newData[i] = animals[i];
         }
 
-        for (unsigned int i = delId + 1; i < animalsCount; i++) {
-            newData[i - 1] = animals[i];
-        }
+        delete[] animals;
+    }
+
+    newData[animalsCount] = animalId;
+    animals = newData;
+
+    animalsCount++;
+
+    return true;
+}
+
+bool Client::RemoveAnimal(unsigned animalId) 
+{
+    if (animalId >= animalsCount) return false;
+
+    if (animalsCount == 1) 
+    {
+        delete[] animals;
+        animals = nullptr;
+
+        animalsCount = 0;
+
+        return true;
+    }
+
+    unsigned int* newData = new unsigned int[animalsCount - 1];
+
+    for (unsigned int i = 0; i < animalId; i++) {
+        newData[i] = animals[i];
+    }
+
+    for (unsigned int i = animalId + 1; i < animalsCount; i++) {
+        newData[i - 1] = animals[i];
     }
 
     delete[] animals;
@@ -104,4 +105,12 @@ bool Client::RemoveAnimal(unsigned int delId)
     animalsCount--;
 
     return true;
+}
+
+void Client::Print() 
+{
+    std::cout << "==============================\n  ID: " << id << "\n  Name: ";
+    if (name) std::cout << name;
+    else std::cout << "NULL";
+    std::cout << "\n  Count of animals: " << animalsCount << '\n';
 }

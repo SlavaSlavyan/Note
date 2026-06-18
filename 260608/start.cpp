@@ -1,11 +1,7 @@
 #include <iostream>
-#include "include/DataBase.hpp"
+#include "include/Report.hpp"
 
 int main()
 {
-    DataBase* db = new DataBase();
-
-    delete db;
-
     return 0;
 }

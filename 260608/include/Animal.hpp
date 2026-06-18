@@ -2,22 +2,44 @@
 
 class Animal {
 
-    unsigned int id, reportsCount, * reports, years, owner;
-    char * name;
+    unsigned int id, years, owner, * reports, reportsCount;
+    char* name;
 
 public:
 
     Animal();
 
-    Animal(unsigned int id, char* name, unsigned int years, unsigned int owner);
-
     Animal(const Animal& other);
 
     ~Animal();
 
-    void AddReport(unsigned int newId);
+    unsigned int GetId() const { return id; }
 
-    unsigned int FindReport(unsigned int findId);
+    unsigned int GetYears() const { return years; }
 
-    bool RemoveReport(unsigned int delId);
+    unsigned int GetOwner() const { return owner; }
+
+    const unsigned int * GetAllReports() const { return reports; }
+
+    unsigned int GetReport(unsigned int listId) const;
+
+    unsigned int GetReportsCount() const { return reportsCount; }
+
+    const char * GetName() const { return name; }
+
+    void SetId(unsigned int newId) { id = newId; }
+
+    void SetYears(unsigned int newYears) { years = newYears; }
+
+    void SetOwner(unsigned int newOwner) { owner = newOwner; }
+
+    bool AddReport(unsigned int reportId);
+
+    bool RemoveReport(unsigned int listId);
+
+    unsigned int FindReport(unsigned int reportId);
+
+    void SetName(const char* newName);
+
+    void Print();
 };

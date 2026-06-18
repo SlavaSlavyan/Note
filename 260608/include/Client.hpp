@@ -2,22 +2,36 @@
 
 class Client {
 
-    unsigned int id, animalsCount, * animals;
+    unsigned int id, * animals, animalsCount;
     char * name;
 
 public:
 
     Client();
 
-    Client(unsigned int id, char* name);
-
     Client(const Client& other);
 
     ~Client();
 
-    void AddAnimal(unsigned int newId);
+    unsigned int GetId() const { return id; }
 
-    unsigned int FindAnimal(unsigned int findId);
+    const unsigned int * GetAllAnimals() const { return animals; }
 
-    bool RemoveAnimal(unsigned int delId);
+    unsigned int GetAnimal(unsigned int animalId) const;
+
+    unsigned int GetAnimalsCount() const { return animalsCount; }
+
+    const char * GetName() const { return name; }
+
+    void SetId(unsigned int newId) { id = newId; }
+
+    bool AddAnimal(unsigned int animalId);
+
+    bool RemoveAnimal(unsigned animalId);
+
+    unsigned int FindAnimal(unsigned animalId) const;
+
+    void SetName(const char* newName);
+
+    void Print();
 };

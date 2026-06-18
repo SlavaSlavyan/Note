@@ -9,11 +9,29 @@ class DataBase {
     Animal** animals;
     Report** reports;
 
-    unsigned int clientCount, animalCount, reportCount;
+    unsigned int ListCounts[3], NewId[3];
 
 public:
 
     DataBase();
 
     ~DataBase();
+
+    void AddClient();
+
+    void RemoveClient();
+
+    void FindClient();
+
+    void AddAnimal();
+
+    void RemoveAnimal();
+
+    void FindAnimal();
+
+    void AddReport();
+
+    void RemoveReport();
+
+    void FindReport();
 };
