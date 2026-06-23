@@ -1,37 +1,42 @@
 #pragma once
+#include "Entity.hpp"
 
-class Client {
+class Client : public Entity {
 
-    unsigned int id, * animals, animalsCount;
-    char * name;
+    char * number, * email;
 
 public:
 
-    Client();
+    Client() : Entity(), number(nullptr), email(nullptr) {
+        SetType("CLIENT");
+    }
 
-    Client(const Client& other);
+    Client(const Client& other) : Entity(other) 
+    {
+        number = SetString(other.number);
+        email = SetString(other.email);
+    }
 
-    ~Client();
+    ~Client() override 
+    {
+        if (number) delete number;
+        if (email) delete email;
 
-    unsigned int GetId() const { return id; }
+        number = nullptr;
+        email = nullptr;
+    }
 
-    const unsigned int * GetAllAnimals() const { return animals; }
+    const char* GetNumber() const { return number; }
 
-    unsigned int GetAnimal(unsigned int animalId) const;
+    const char* GetEmail() const { return email; }
 
-    unsigned int GetAnimalsCount() const { return animalsCount; }
+    void SetNumber(const char* newNumber) { 
+        if (number) delete[] number;
+        number = SetString(newNumber); 
+    }
 
-    const char * GetName() const { return name; }
-
-    void SetId(unsigned int newId) { id = newId; }
-
-    bool AddAnimal(unsigned int animalId);
-
-    bool RemoveAnimal(unsigned animalId);
-
-    unsigned int FindAnimal(unsigned animalId) const;
-
-    void SetName(const char* newName);
-
-    void Print();
+    void SetEmail(const char* newEmail) {
+        if (email) delete[] email;
+        email = SetString(newEmail); 
+    }
 };

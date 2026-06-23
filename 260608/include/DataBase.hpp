@@ -1,15 +1,16 @@
 #pragma once
-#include "Client.hpp"
-#include "Animal.hpp"
+#include "Entity.hpp"
 #include "Report.hpp"
 
 class DataBase {
 
-    Client** clients;
-    Animal** animals;
+    Entity** list;
     Report** reports;
 
-    unsigned int ListCounts[3], NewId[3];
+    unsigned long length;
+    unsigned int reportsCount, reportNewId, vetNewId, clientNewId, animalNewId;
+
+    void IncreaseList();
 
 public:
 
@@ -17,21 +18,13 @@ public:
 
     ~DataBase();
 
+    void AddVet();
+
     void AddClient();
-
-    void RemoveClient();
-
-    void FindClient();
 
     void AddAnimal();
 
-    void RemoveAnimal();
-
-    void FindAnimal();
-
     void AddReport();
 
-    void RemoveReport();
-
-    void FindReport();
+    void RemoveEntity();
 };

@@ -1,45 +1,19 @@
 #pragma once
+#include "Entity.hpp"
 
-class Animal {
+class Animal : public Entity {
 
-    unsigned int id, years, owner, * reports, reportsCount;
-    char* name;
+    unsigned int age;
 
 public:
 
-    Animal();
+    Animal() : Entity(), age(0) {
+        SetType("ANIMAL");
+    }
 
-    Animal(const Animal& other);
+    Animal(const Animal& other) : Entity(), age(other.age) {}
 
-    ~Animal();
+    unsigned int GetAge() const { return age; }
 
-    unsigned int GetId() const { return id; }
-
-    unsigned int GetYears() const { return years; }
-
-    unsigned int GetOwner() const { return owner; }
-
-    const unsigned int * GetAllReports() const { return reports; }
-
-    unsigned int GetReport(unsigned int listId) const;
-
-    unsigned int GetReportsCount() const { return reportsCount; }
-
-    const char * GetName() const { return name; }
-
-    void SetId(unsigned int newId) { id = newId; }
-
-    void SetYears(unsigned int newYears) { years = newYears; }
-
-    void SetOwner(unsigned int newOwner) { owner = newOwner; }
-
-    bool AddReport(unsigned int reportId);
-
-    bool RemoveReport(unsigned int listId);
-
-    unsigned int FindReport(unsigned int reportId);
-
-    void SetName(const char* newName);
-
-    void Print();
+    void SetAge(unsigned int newAge) { age = newAge; }
 };

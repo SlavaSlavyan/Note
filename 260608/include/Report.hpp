@@ -2,8 +2,13 @@
 
 class Report {
 
-    unsigned int id, animal;
-    char * date, * info;
+    bool status;
+    unsigned int id, vetId, clientId, animalId;
+    char * anamnesis, * diagnosis, * date;
+
+    char* SetString(const char* data);
+
+    void Print(const char* data) const;
 
 public:
 
@@ -13,21 +18,48 @@ public:
 
     ~Report();
 
-    unsigned int GetId() { return id; }
+    bool GetStatus() const { return status; }
 
-    unsigned int GetAnimal() { return animal; }
+    unsigned int GetId() const { return id; }
 
-    const char * GetDate() { return date; }
+    unsigned int GetVetId() const { return vetId; }
 
-    const char * GetInfo() { return info; }
+    unsigned int GetClientId() const { return clientId; }
+
+    unsigned int GetAnimalId() const { return animalId; }
+
+    const char* GetAnamnesis() const { return anamnesis; }
+
+    const char* GetDiagnosis() const { return diagnosis; }
+
+    const char* GetDate() const { return date; }
+
+    void SetStatus(bool newStatus) { status = newStatus; }
 
     void SetId(unsigned int newId) { id = newId; }
 
-    void SetAnimal(unsigned int newAnimal) { animal = newAnimal; }
+    void SetVetId(unsigned int newVetId) { vetId = newVetId; }
 
-    void SetDate(const char* newDate);
+    void SetClientId(unsigned int newClientId) { clientId = newClientId; }
 
-    void SetInfo(const char* newInfo);
+    void SetAnimalId(unsigned int newAnimalId) { animalId = newAnimalId; }
 
-    void Print();
+    void SetAnamnesis(const char* newAnamnesis) {
+        if (anamnesis) delete[] anamnesis;
+        anamnesis = SetString(newAnamnesis);
+    }
+
+    void SetDiagnosis(const char* newDiagnosis) {
+        if (diagnosis) delete[] diagnosis;
+        diagnosis = SetString(newDiagnosis);
+    }
+
+    void SetDate(const char* newDate) {
+        if (date) delete[] date;
+        date = SetString(newDate);
+    }
+
+    void PrintDiagnosis();
+
+    void PrintAnamnesis();
 };

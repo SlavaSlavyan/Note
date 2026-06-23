@@ -2,63 +2,47 @@
 #include <cstring>
 #include <iostream>
 
-void Report::SetDate(const char* newDate)
+char* Report::SetString(const char* data)
 {
-    if (newDate) {
-        date = new char[strlen(newDate) + 1];
-        strcpy_s(date, strlen(newDate) + 1, newDate);
+    if (!data) {
+        return nullptr;
     }
 
-    else date = nullptr;
+    char* string = new char[strlen(data) + 1];
+    strcpy_s(string, strlen(data) + 1, data);
+
+    return string;
 }
 
-void Report::SetInfo(const char* newInfo)
+Report::Report() : status(false), id(0), vetId(0), animalId(0), clientId(0), anamnesis(nullptr), diagnosis(nullptr), date(nullptr) {}
+
+Report::Report(const Report& other) : status(other.status), id(other.id), vetId(other.vetId), animalId(other.animalId), clientId(other.clientId)
 {
-    if (newInfo) {
-        info = new char[strlen(newInfo) + 1];
-        strcpy_s(info, strlen(newInfo) + 1, newInfo);
-    }
-
-    else info = nullptr;
-}
-
-Report::Report() : id(0), animal(0), date(nullptr), info(nullptr) {}
-
-Report::Report(const Report& other) : Report()
-{
-    id = other.id;
-    animal = other.animal;
-
+    SetAnamnesis(other.anamnesis);
+    SetDiagnosis(other.diagnosis);
     SetDate(other.date);
-    SetInfo(other.info);
 }
 
-Report::~Report()
+void Report::Print(const char* data) const 
 {
-    if (date) delete[] date;
-    if (info) delete[] info;
-}
+    if (!data) return;
 
-void Report::Print()
-{
-    std::cout << "--------------------------------------------------\n\n  Report number: " << id << "\n\n  ";
-    if (info) 
-    {
-        unsigned int length = strlen(info);
-        int part_size = 50;
-        
-        for (int i = 0; i < length; i += part_size) {
+    unsigned int count = 0;
+    while (data[count] != '\0') {
+        std::cout << data[count];
+        count++;
 
-            for (int j = 0; j < part_size && i + j < length; ++j) {
-                std::cout << info[i + j];
-            }
-            std::cout << "\n  "; 
+        if (count % 50 == 0) {
+            std::cout << '\n';
         }
     }
-    else std::cout << "  NO INFO FOUND\n";
-    
-    if (date) std::cout << "\n  [" << date;
-    else std::cout << "\n  [NO DATE";
+    std::cout << '\n';
+}
 
-    std::cout << "]\n\n--------------------------------------------------\n";
+void Report::PrintAnamnesis() {
+    Print(anamnesis);
+}
+
+void Report::PrintDiagnosis() {
+    Print(diagnosis);
 }
